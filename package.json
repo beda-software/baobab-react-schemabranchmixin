@@ -1,6 +1,6 @@
 {
   "name": "baobab-react-schemabranchmixin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SchemaBranchMixin for baobab-react. Mixin allows to define schema for branch component",
   "main": "./dist/index.js",
   "scripts": {
