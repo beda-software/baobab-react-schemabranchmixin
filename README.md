@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin.svg)](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin)
+
 baobab-react-schemabranchmixin
 =========
 
