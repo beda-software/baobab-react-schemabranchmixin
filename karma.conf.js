@@ -23,14 +23,14 @@ module.exports = function (config) {
     singleRun: false,
     webpack: {
       babel: {
-          presets: ['es2015', 'react']
+        presets: ['es2015']
       },
       isparta: {
         embedSource: true,
         noAutoWrap: true,
         // these babel options will be passed only to isparta and not to babel-loader
         babel: {
-          presets: ['es2015', 'react']
+          presets: ['es2015']
         }
       },
       module: {
