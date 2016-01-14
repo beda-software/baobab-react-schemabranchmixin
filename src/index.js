@@ -64,7 +64,7 @@ const SchemaBranchMixin = {
   },
 
   getTreeCursor: function (props) {
-    return props.tree || this.context.tree.select()
+    return props.tree || this.context.tree.select();
   },
 
   getInitialState: function () {
