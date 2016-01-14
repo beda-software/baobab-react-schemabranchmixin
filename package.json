@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "test": "karma start karma.conf.js --single-run",
-    "compile": "babel --presets es2015, react --out-dir dist ./src",
+    "compile": "babel --presets es2015,react --out-dir dist ./src",
     "prepublish": "npm run compile"
   },
   "repository": {
