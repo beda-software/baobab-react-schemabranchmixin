@@ -9,7 +9,6 @@ SchemaBranchMixin based on baobab-react
 
 ## Usage
 
-```
 SchemaCursorMixin is designed for use with baobab-react mixin branch.
 General purpose of mixin is tree autogeneration with schema.
 
@@ -17,6 +16,7 @@ This mixin add cursors from component `schema` for `tree` component prop or root
 
 Example of usage:
 
+```
 Our tree (auto-generated from schema):
 {
  globalVal: 'global value (predefined)',
