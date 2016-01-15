@@ -1,6 +1,6 @@
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![Build Status](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin.svg)](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin)
+[![Coverage Status](https://coveralls.io/repos/Brogency/baobab-react-schemabranchmixin/badge.svg?branch=master&service=github)](https://coveralls.io/github/Brogency/baobab-react-schemabranchmixin?branch=master)
+[![npm version](https://badge.fury.io/js/baobab-react-schemabranchmixin.svg)](https://badge.fury.io/js/baobab-react-schemabranchmixin)
 
 baobab-react-schemabranchmixin
 =========
