@@ -5,3 +5,4 @@ node_modules/
 coverage/
 .npmignore
 .gitignore
+karma.conf.js
