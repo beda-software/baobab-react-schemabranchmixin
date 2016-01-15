@@ -71,4 +71,5 @@ const Page = React.createClass({
 
 ## Release History
 
+* 1.0.3 Fixed deps
 * 1.0.2 Initial release
