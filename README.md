@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin.svg)](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin)
+[![Travis][build-badge]][build]
+[![npm package][npm-badge]][npm]
+[![Coveralls][coveralls-badge]][coveralls]
 
 baobab-react-schemabranchmixin
 =========
