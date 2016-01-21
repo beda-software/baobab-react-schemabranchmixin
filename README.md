@@ -9,6 +9,8 @@ SchemaBranchMixin based on baobab-react
 
 ## Installation
 
+  npm install baobab --save
+  npm install baobab-react --save
   npm install baobab-react-schemabranchmixin --save
 
 ## Usage
