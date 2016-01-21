@@ -136,6 +136,7 @@ const SchemaBranchMixin = {
   }
 };
 
+export {PropTypes};
 export default {
   displayName: 'SchemaBranchMixin',
 
