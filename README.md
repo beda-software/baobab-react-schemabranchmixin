@@ -75,6 +75,7 @@ const Page = React.createClass({
 
 ## Release History
 
+* 1.0.6 Added baobab-prop-types deps
 * 1.0.4 Added PropTypes to export
 * 1.0.3 Fixed deps
 * 1.0.2 Initial release

@@ -3,11 +3,11 @@ import Baobab from 'baobab';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 import SchemaBranchMixin from '../src/index';
-import PropTypes from '../src/utils/prop-types';
+import BaobabPropTypes from 'baobab-prop-types';
 
 const Root = React.createClass({
   childContextTypes: {
-    tree: PropTypes.baobab
+    tree: BaobabPropTypes.baobab
   },
 
   getChildContext: function () {

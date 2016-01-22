@@ -2,6 +2,7 @@ src/
 test/
 node_modules/
 .coveralls.yml
+.travis.yml
 coverage/
 .idea/
 .npmignore

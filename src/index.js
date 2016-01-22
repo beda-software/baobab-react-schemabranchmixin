@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import {branch as BranchMixin} from 'baobab-react/mixins';
-import PropTypes from './utils/prop-types';
+import BaobabPropTypes from 'baobab-prop-types';
 
 /**
  * SchemaCursorMixin is designed for use with baobab-react mixin `branch`.
@@ -56,11 +56,11 @@ import PropTypes from './utils/prop-types';
 
 const SchemaBranchMixin = {
   propTypes: {
-    tree: React.PropTypes.oneOfType([PropTypes.baobab, PropTypes.cursor])
+    tree: React.PropTypes.oneOfType([BaobabPropTypes.baobab, BaobabPropTypes.cursor])
   },
 
   contextTypes: {
-    tree: PropTypes.baobab
+    tree: BaobabPropTypes.baobab
   },
 
   getTreeCursor: function (props) {
@@ -136,7 +136,6 @@ const SchemaBranchMixin = {
   }
 };
 
-export {PropTypes};
 export default {
   displayName: 'SchemaBranchMixin',
 
