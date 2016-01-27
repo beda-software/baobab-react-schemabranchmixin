@@ -118,7 +118,9 @@ const SchemaBranchMixin = {
       const cursor = tree.select(key);
 
       if (!cursor.exists() || this.schema._override === true) {
-        return cursor.set(value);
+        cursor.set(value);
+        // Explicit cursor.get() used because value can be a monkey dynamic object
+        return cursor.get();
       }
 
       const cursorValue = cursor.get();

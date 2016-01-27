@@ -1,5 +1,5 @@
 import React from 'react';
-import Baobab from 'baobab';
+import {monkey, default as Baobab} from 'baobab';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 import SchemaBranchMixin from '../src/index';
@@ -82,6 +82,20 @@ const TestComponentInnerOverride = React.createClass({
       fieldSecond: 'initialSecond'
     },
     fieldFirst: 'initialFirst'
+  },
+
+  render: function () {
+    return null;
+  }
+});
+
+const TestComponentWithMonkey = React.createClass({
+  mixins: [SchemaBranchMixin],
+
+  schema: {
+    a: 1,
+    b: 2,
+    sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b)
   },
 
   render: function () {
@@ -194,5 +208,16 @@ describe('Check SchemaBranchMixin', () => {
       },
       fieldFirst: 'initialFirst'
     });
+  });
+
+  it('should monkey in schema works correctly', () => {
+    renderComponent({innerComponent: TestComponentWithMonkey});
+    expect(component.state.a).to.be.equal(1);
+    expect(component.state.b).to.be.equal(2);
+    expect(component.state.sum).to.be.equal(3);
+
+    component.cursors.a.set(5);
+    component.cursors.b.set(6);
+    expect(component.state.sum).to.be.equal(11);
   });
 });
