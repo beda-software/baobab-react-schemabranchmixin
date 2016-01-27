@@ -95,7 +95,12 @@ const TestComponentWithMonkey = React.createClass({
   schema: {
     a: 1,
     b: 2,
-    sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b)
+    sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b),
+    innerMonkey: {
+      a: 3,
+      b: 4,
+      sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b)
+    }
   },
 
   render: function () {
@@ -219,5 +224,36 @@ describe('Check SchemaBranchMixin', () => {
     component.cursors.a.set(5);
     component.cursors.b.set(6);
     expect(component.state.sum).to.be.equal(11);
+  });
+
+  it('should inner monkey in schema works correctly', () => {
+    expect(component.state.innerMonkey.a).to.be.equal(3);
+    expect(component.state.innerMonkey.b).to.be.equal(4);
+    expect(component.state.innerMonkey.sum).to.be.equal(7);
+
+    component.cursors.innerMonkey.set('a', 5);
+    component.cursors.innerMonkey.set('b', 6);
+    expect(component.state.innerMonkey.sum).to.be.equal(11);
+  });
+
+  it('should monkey in schema works correctly after second initialization', () => {
+    renderComponent({innerComponent: TestComponentWithMonkey});
+    expect(component.state.a).to.be.equal(5);
+    expect(component.state.b).to.be.equal(6);
+    expect(component.state.sum).to.be.equal(11);
+
+    component.cursors.a.set(7);
+    component.cursors.b.set(8);
+    expect(component.state.sum).to.be.equal(15);
+  });
+
+  it('should inner monkey in schema works correctly after second initialization', () => {
+    expect(component.state.innerMonkey.a).to.be.equal(5);
+    expect(component.state.innerMonkey.b).to.be.equal(6);
+    expect(component.state.innerMonkey.sum).to.be.equal(11);
+
+    component.cursors.innerMonkey.set('a', 7);
+    component.cursors.innerMonkey.set('b', 8);
+    expect(component.state.innerMonkey.sum).to.be.equal(15);
   });
 });

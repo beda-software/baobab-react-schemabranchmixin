@@ -114,24 +114,20 @@ const SchemaBranchMixin = {
    * @returns {Object}
    */
   createState: function (tree) {
-    const state = _.mapValues(this.schema, (value, key) => {
-      const cursor = tree.select(key);
+    function iterate(curTree, curSchema) {
+      return _.mapValues(curSchema, (value, key) => {
+        const cursor = curTree.select(key);
 
-      if (!cursor.exists() || this.schema._override === true) {
-        cursor.set(value);
-        // Explicit cursor.get() used because value can be a monkey dynamic object
+        if (!cursor.exists() || curSchema._override === true) {
+          cursor.set(value);
+        } else if (_.isPlainObject(value)) {
+          iterate(cursor, value)
+        }
         return cursor.get();
-      }
+      });
+    }
 
-      const cursorValue = cursor.get();
-
-      if (_.isPlainObject(value)) {
-        return cursor.set(_.merge({}, value, cursorValue));
-      }
-
-      return cursorValue;
-    });
-
+    const state = iterate(tree, this.schema);
     this.context.tree.commit();
 
     return state;
