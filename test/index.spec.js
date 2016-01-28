@@ -108,6 +108,22 @@ const TestComponentWithMonkey = React.createClass({
   }
 });
 
+const TestComponentWithNestedSchemaDefaultValues = React.createClass({
+  mixins: [SchemaBranchMixin],
+
+  schema: {
+    nested: {
+      default: {
+        value: null
+      }
+    }
+  },
+
+  render: function () {
+    return null;
+  }
+});
+
 const TestComponent = React.createClass({
   mixins: [SchemaBranchMixin],
 
@@ -255,5 +271,12 @@ describe('Check SchemaBranchMixin', () => {
     component.cursors.innerMonkey.set('a', 7);
     component.cursors.innerMonkey.set('b', 8);
     expect(component.state.innerMonkey.sum).to.be.equal(15);
+  });
+
+
+  it('should nested schema default values does not override existing tree', () => {
+    tree.set(['component1', 'nested', 'default'], null);
+    renderComponent({innerComponent: TestComponentWithNestedSchemaDefaultValues});
+    expect(tree.get('component1', 'nested', 'default')).to.be.equal(null);
   });
 });

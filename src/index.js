@@ -120,7 +120,7 @@ const SchemaBranchMixin = {
 
         if (!cursor.exists() || curSchema._override === true) {
           cursor.set(value);
-        } else if (_.isPlainObject(value)) {
+        } else if (_.isPlainObject(value) && _.isPlainObject(cursor.get())) {
           iterate(cursor, value)
         }
         return cursor.get();
