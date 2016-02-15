@@ -124,6 +124,24 @@ const TestComponentWithNestedSchemaDefaultValues = React.createClass({
   }
 });
 
+const TestComponentWithCursorsAsFunction = React.createClass({
+  mixins: [SchemaBranchMixin],
+
+  schema: {
+    fromSchema: null
+  },
+
+  cursors: function () {
+    return {
+      fromCursors: ['fromCursor']
+    };
+  },
+
+  render: function () {
+    return null;
+  }
+});
+
 const TestComponent = React.createClass({
   mixins: [SchemaBranchMixin],
 
@@ -278,5 +296,10 @@ describe('Check SchemaBranchMixin', () => {
     tree.set(['component1', 'nested', 'default'], null);
     renderComponent({innerComponent: TestComponentWithNestedSchemaDefaultValues});
     expect(tree.get('component1', 'nested', 'default')).to.be.equal(null);
+  });
+
+  it('should cursors as function work correctly', () => {
+    renderComponent({innerComponent: TestComponentWithCursorsAsFunction});
+    expect(component.cursors).to.have.keys('fromSchema', 'fromCursors');
   });
 });

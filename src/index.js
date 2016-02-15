@@ -68,6 +68,9 @@ const SchemaBranchMixin = {
   },
 
   getInitialState: function () {
+    if (_.isFunction(this.cursors)) {
+      this.cursors = this.cursors(this.props, this.context);
+    }
     this.cursors = _.cloneDeep(this.cursors || {});
     this.schema = _.cloneDeep(this.schema || {});
 
