@@ -23,7 +23,7 @@ General purpose of mixin is tree autogeneration with schema.
 This mixin add cursors from component `schema` for `tree` component prop or root tree.
 
 Our tree (auto-generated from schema):
-```
+```javascript
 {
  globalVal: 'global value (predefined)',
  form: {
@@ -34,7 +34,7 @@ Our tree (auto-generated from schema):
 ```
 
 Example of usage:
-```
+```javascript
 const EditForm = React.createClass({
  mixins: [SchemaBranchMixin],
  schema: {
