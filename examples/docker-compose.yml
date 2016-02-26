@@ -1,0 +1,10 @@
+web:
+  build: .
+  command: npm run start
+  ports:
+  - "8000:8000"
+  - "35729:35729"
+  volumes:
+  - .:/app/user
+  environment:
+  - PORT=8000
