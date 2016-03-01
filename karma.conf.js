@@ -1,5 +1,5 @@
 var babelOptions = {
-  presets: ['es2015', 'react']
+  presets: ['es2015', 'react'],
 };
 
 module.exports = function (config) {
@@ -8,16 +8,16 @@ module.exports = function (config) {
     frameworks: ['phantomjs-shim', 'mocha', 'chai'],
 
     files: [
-      'test/*.spec.js'
+      'test/*.spec.js',
     ],
     preprocessors: {
-      'test/*.spec.js': 'webpack'
+      'test/*.spec.js': 'webpack',
     },
 
     reporters: ['coverage', 'dots', 'coveralls'],
     coverageReporter: {
       type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
-      dir: 'coverage/'
+      dir: 'coverage/',
     },
 
     webpack: {
@@ -25,31 +25,34 @@ module.exports = function (config) {
       isparta: {
         embedSource: true,
         noAutoWrap: true,
+
         // these babel options will be passed only to isparta and not to babel-loader
-        babel: babelOptions
+        babel: babelOptions,
       },
       module: {
         preLoaders: [
+
           // Transpile only tests
           {
             test: /\.spec\.jsx?/,
             loader: 'babel',
-            exclude: /node_modules/
+            exclude: /node_modules/,
           },
+
           // Transpile all project without tests
           {
             test: /\.jsx?$/,
             loader: 'isparta',
             exclude: [
               /node_modules/,
-              /\.spec\.jsx?/
-            ]
-          }
-        ]
-      }
+              /\.spec\.jsx?/,
+            ],
+          },
+        ],
+      },
     },
     webpackServer: {
-      noInfo: true
+      noInfo: true,
     },
 
     port: 9876,
@@ -57,6 +60,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     browsers: ['PhantomJS'],
     autoWatch: true,
-    singleRun: false
+    singleRun: false,
   });
 };

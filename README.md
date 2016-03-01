@@ -75,6 +75,7 @@ const Page = React.createClass({
 
 ## Release History
 
+* 1.0.9 Fixed problem with cursors definition as function
 * 1.0.8 Fixed problems with nested schema default values
 * 1.0.7 Fixed problems with monkey
 * 1.0.6 Added baobab-prop-types deps

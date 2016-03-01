@@ -7,16 +7,16 @@ import BaobabPropTypes from 'baobab-prop-types';
 
 const Root = React.createClass({
   childContextTypes: {
-    tree: BaobabPropTypes.baobab
+    tree: BaobabPropTypes.baobab,
   },
 
-  getChildContext: function () {
+  getChildContext() {
     return {
-      tree: this.props.tree
+      tree: this.props.tree,
     };
   },
 
-  render: function() {
+  render() {
     const Component = this.props.component;
 
     return (
@@ -24,7 +24,7 @@ const Root = React.createClass({
         <Component ref="component" {...this.props.componentProps} />
       </div>
     );
-  }
+  },
 });
 
 const tree = new Baobab(
@@ -32,7 +32,7 @@ const tree = new Baobab(
     componentKey: 'component1',
     component2: {
       firstLevel: {},
-      fieldFirst: 'fromComponent2'
+      fieldFirst: 'fromComponent2',
     },
     component1: {
       notDeclaredInStateAtFirstLevel: true,
@@ -40,15 +40,15 @@ const tree = new Baobab(
         secondLevel: {
           fieldThird: 'changedThird',
           notDeclaredInStateAtThirdLevel: {
-            value: [1, 2, 3]
-          }
-        }
-      }
-    }
+            value: [1, 2, 3],
+          },
+        },
+      },
+    },
   },
   {
     immutable: false,
-    asynchronous: false
+    asynchronous: false,
   }
 );
 
@@ -58,16 +58,16 @@ const TestComponentInner = React.createClass({
   schema: {
     firstLevel: {
       secondLevel: {
-        fieldThird: 'initialThird'
+        fieldThird: 'initialThird',
       },
-      fieldSecond: 'initialSecond'
+      fieldSecond: 'initialSecond',
     },
-    fieldFirst: 'initialFirst'
+    fieldFirst: 'initialFirst',
   },
 
-  render: function () {
+  render() {
     return null;
-  }
+  },
 });
 
 const TestComponentInnerOverride = React.createClass({
@@ -77,16 +77,16 @@ const TestComponentInnerOverride = React.createClass({
     _override: true,
     firstLevel: {
       secondLevel: {
-        fieldThird: 'initialThird'
+        fieldThird: 'initialThird',
       },
-      fieldSecond: 'initialSecond'
+      fieldSecond: 'initialSecond',
     },
-    fieldFirst: 'initialFirst'
+    fieldFirst: 'initialFirst',
   },
 
-  render: function () {
+  render() {
     return null;
-  }
+  },
 });
 
 const TestComponentWithMonkey = React.createClass({
@@ -99,13 +99,13 @@ const TestComponentWithMonkey = React.createClass({
     innerMonkey: {
       a: 3,
       b: 4,
-      sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b)
-    }
+      sum: monkey(['.', 'a'], ['.', 'b'], (a, b) => a + b),
+    },
   },
 
-  render: function () {
+  render() {
     return null;
-  }
+  },
 });
 
 const TestComponentWithNestedSchemaDefaultValues = React.createClass({
@@ -114,29 +114,47 @@ const TestComponentWithNestedSchemaDefaultValues = React.createClass({
   schema: {
     nested: {
       default: {
-        value: null
-      }
-    }
+        value: null,
+      },
+    },
   },
 
-  render: function () {
+  render() {
     return null;
-  }
+  },
+});
+
+const TestComponentWithCursorsAsFunction = React.createClass({
+  mixins: [SchemaBranchMixin],
+
+  schema: {
+    fromSchema: null,
+  },
+
+  cursors() {
+    return {
+      fromCursors: ['fromCursor'],
+    };
+  },
+
+  render() {
+    return null;
+  },
 });
 
 const TestComponent = React.createClass({
   mixins: [SchemaBranchMixin],
 
   schema: {
-    componentKey: 'component1'
+    componentKey: 'component1',
   },
 
-  render: function () {
+  render() {
     const Component = this.props.innerComponent;
     return (
       <Component ref="component" tree={this.props.tree.select(this.state.componentKey)} />
     );
-  }
+  },
 });
 
 describe('Check SchemaBranchMixin', () => {
@@ -148,7 +166,7 @@ describe('Check SchemaBranchMixin', () => {
             component={TestComponent}
             componentProps={_.defaults(componentProps, {
               tree: tree.select(),
-              innerComponent: TestComponentInner
+              innerComponent: TestComponentInner,
             })} />
     );
     component = rootComponent.refs.component.refs.component;
@@ -174,12 +192,12 @@ describe('Check SchemaBranchMixin', () => {
         secondLevel: {
           fieldThird: 'changedThird',
           notDeclaredInStateAtThirdLevel: {
-            value: [1, 2, 3]
-          }
+            value: [1, 2, 3],
+          },
         },
-        fieldSecond: 'initialSecond'
+        fieldSecond: 'initialSecond',
       },
-      fieldFirst: 'initialFirst'
+      fieldFirst: 'initialFirst',
     });
   });
 
@@ -189,11 +207,11 @@ describe('Check SchemaBranchMixin', () => {
     expect(component.state).to.be.deep.equal({
       firstLevel: {
         secondLevel: {
-          fieldThird: 'initialThird'
+          fieldThird: 'initialThird',
         },
-        fieldSecond: 'initialSecond'
+        fieldSecond: 'initialSecond',
       },
-      fieldFirst: 'fromComponent2'
+      fieldFirst: 'fromComponent2',
     });
   });
 
@@ -211,28 +229,28 @@ describe('Check SchemaBranchMixin', () => {
         secondLevel: {
           fieldThird: 'changedThird',
           notDeclaredInStateAtThirdLevel: {
-            value: [1, 2, 3]
-          }
-        }
+            value: [1, 2, 3],
+          },
+        },
       },
-      fieldFirst: 'changed'
+      fieldFirst: 'changed',
     });
-    renderComponent({innerComponent: TestComponentInnerOverride});
+    renderComponent({ innerComponent: TestComponentInnerOverride });
 
     expect(component.state).to.be.deep.equal({
       _override: true,
       firstLevel: {
         secondLevel: {
-          fieldThird: 'initialThird'
+          fieldThird: 'initialThird',
         },
-        fieldSecond: 'initialSecond'
+        fieldSecond: 'initialSecond',
       },
-      fieldFirst: 'initialFirst'
+      fieldFirst: 'initialFirst',
     });
   });
 
   it('should monkey in schema works correctly', () => {
-    renderComponent({innerComponent: TestComponentWithMonkey});
+    renderComponent({ innerComponent: TestComponentWithMonkey });
     expect(component.state.a).to.be.equal(1);
     expect(component.state.b).to.be.equal(2);
     expect(component.state.sum).to.be.equal(3);
@@ -253,7 +271,7 @@ describe('Check SchemaBranchMixin', () => {
   });
 
   it('should monkey in schema works correctly after second initialization', () => {
-    renderComponent({innerComponent: TestComponentWithMonkey});
+    renderComponent({ innerComponent: TestComponentWithMonkey });
     expect(component.state.a).to.be.equal(5);
     expect(component.state.b).to.be.equal(6);
     expect(component.state.sum).to.be.equal(11);
@@ -273,10 +291,14 @@ describe('Check SchemaBranchMixin', () => {
     expect(component.state.innerMonkey.sum).to.be.equal(15);
   });
 
-
   it('should nested schema default values does not override existing tree', () => {
     tree.set(['component1', 'nested', 'default'], null);
-    renderComponent({innerComponent: TestComponentWithNestedSchemaDefaultValues});
+    renderComponent({ innerComponent: TestComponentWithNestedSchemaDefaultValues });
     expect(tree.get('component1', 'nested', 'default')).to.be.equal(null);
+  });
+
+  it('should cursors as function work correctly', () => {
+    renderComponent({ innerComponent: TestComponentWithCursorsAsFunction });
+    expect(component.cursors).to.have.keys('fromSchema', 'fromCursors');
   });
 });
