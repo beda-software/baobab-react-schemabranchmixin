@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import {branch as BranchMixin} from 'baobab-react/mixins';
+import { branch as BranchMixin } from 'baobab-react/mixins';
 import BaobabPropTypes from 'baobab-prop-types';
 
 /**
@@ -29,7 +29,7 @@ import BaobabPropTypes from 'baobab-prop-types';
  *  cursors: {
  *    globalVal: ['globalVal']
  *  },
- *  render: function () {
+ *  render() {
  *    We have this.cursors.globalVal (via baobab-react branch mixin)
  *    And we have `this.cursors.name`, `this.cursors.externalId` via
  *    SchemaBranchMixin.
@@ -48,7 +48,7 @@ import BaobabPropTypes from 'baobab-prop-types';
  *     form: {}
  *   },
  *
- *   render: function () {
+ *   render() {
  *     return (<EditForm tree={this.cursors.form} />);
  *   }
  * });
@@ -56,21 +56,22 @@ import BaobabPropTypes from 'baobab-prop-types';
 
 const SchemaBranchMixin = {
   propTypes: {
-    tree: React.PropTypes.oneOfType([BaobabPropTypes.baobab, BaobabPropTypes.cursor])
+    tree: React.PropTypes.oneOfType([BaobabPropTypes.baobab, BaobabPropTypes.cursor]),
   },
 
   contextTypes: {
-    tree: BaobabPropTypes.baobab
+    tree: BaobabPropTypes.baobab,
   },
 
-  getTreeCursor: function (props) {
+  getTreeCursor(props) {
     return props.tree || this.context.tree.select();
   },
 
-  getInitialState: function () {
+  getInitialState() {
     if (_.isFunction(this.cursors)) {
       this.cursors = this.cursors(this.props, this.context);
     }
+
     this.cursors = _.cloneDeep(this.cursors || {});
     this.schema = _.cloneDeep(this.schema || {});
 
@@ -81,13 +82,13 @@ const SchemaBranchMixin = {
     _.each(this.schema, (value, key) => this.cursors[key] = tree.select(key));
   },
 
-  componentWillMount: function () {
+  componentWillMount() {
     const tree = this.getTreeCursor(this.props);
 
     this.updateStateFromTree(tree);
   },
 
-  componentWillReceiveProps: function (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const oldTree = this.getTreeCursor(this.props);
     const newTree = this.getTreeCursor(nextProps);
 
@@ -105,7 +106,7 @@ const SchemaBranchMixin = {
    *
    * @param tree
    */
-  updateStateFromTree: function (tree) {
+  updateStateFromTree(tree) {
     this.setState(this.createState(tree));
   },
 
@@ -116,7 +117,7 @@ const SchemaBranchMixin = {
    * @param tree Baobab Tree
    * @returns {Object}
    */
-  createState: function (tree) {
+  createState(tree) {
     function iterate(curTree, curSchema) {
       return _.mapValues(curSchema, (value, key) => {
         const cursor = curTree.select(key);
@@ -124,8 +125,9 @@ const SchemaBranchMixin = {
         if (!cursor.exists() || curSchema._override === true) {
           cursor.set(value);
         } else if (_.isPlainObject(value) && _.isPlainObject(cursor.get())) {
-          iterate(cursor, value)
+          iterate(cursor, value);
         }
+
         return cursor.get();
       });
     }
@@ -134,11 +136,11 @@ const SchemaBranchMixin = {
     this.context.tree.commit();
 
     return state;
-  }
+  },
 };
 
 export default {
   displayName: 'SchemaBranchMixin',
 
-  mixins: [SchemaBranchMixin, BranchMixin]
+  mixins: [SchemaBranchMixin, BranchMixin],
 };
