@@ -4,10 +4,10 @@ import counterRoute from './containers/counter/route';
 import greetRoute from './containers/greet/route';
 
 export default {
-    component: Base,
+  component: Base,
 
-    childRoutes: [
-        greetRoute,
-        counterRoute,
-    ],
+  childRoutes: [
+    greetRoute,
+    counterRoute,
+  ],
 };

@@ -1,7 +1,6 @@
 import React from 'react';
-import {monkey, default as Baobab} from 'baobab';
+import { monkey, default as Baobab } from 'baobab';
 import TestUtils from 'react-addons-test-utils';
-import {expect} from 'chai';
 import SchemaBranchMixin from '../src/index';
 import BaobabPropTypes from 'baobab-prop-types';
 

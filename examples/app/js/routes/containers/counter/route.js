@@ -1,7 +1,7 @@
 import Base from './index';
 
 export default {
-    path: '/counter',
+  path: '/counter',
 
-    component: Base,
-}
+  component: Base,
+};

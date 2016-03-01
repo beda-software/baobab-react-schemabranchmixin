@@ -1,3 +1,3 @@
 import Baobab from 'baobab';
 
-export default new Baobab({}, {immutable: false});
+export default new Baobab({}, { immutable: false });
