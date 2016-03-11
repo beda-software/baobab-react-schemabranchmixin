@@ -72,8 +72,8 @@ const SchemaBranchMixin = {
       this.cursors = this.cursors(this.props, this.context);
     }
 
-    this.cursors = _.cloneDeep(this.cursors || {});
-    this.schema = _.cloneDeep(this.schema || {});
+    this.cursors = this.cursors || {};
+    this.schema = this.schema || {};
 
     const tree = this.getTreeCursor(this.props);
 
