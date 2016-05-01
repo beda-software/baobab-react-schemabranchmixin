@@ -7,6 +7,7 @@ export default React.createClass({
   mixins: [SchemaBranchMixin],
 
   schema: {
+    uuid: null,
     counter: 0,
   },
 
