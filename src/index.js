@@ -70,10 +70,11 @@ const SchemaBranchMixin = {
   getInitialState() {
     if (_.isFunction(this.cursors)) {
       this.cursors = this.cursors(this.props, this.context);
+    } else {
+      this.cursors = _.cloneDeep(this.cursors) || {};
     }
 
-    this.cursors = this.cursors || {};
-    this.schema = this.schema || {};
+    this.schema = _.cloneDeep(this.schema || {});
 
     const tree = this.getTreeCursor(this.props);
 
