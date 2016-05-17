@@ -88,10 +88,11 @@ var SchemaBranchMixin = {
 
     if (_lodash2.default.isFunction(this.cursors)) {
       this.cursors = this.cursors(this.props, this.context);
+    } else {
+      this.cursors = _lodash2.default.cloneDeep(this.cursors) || {};
     }
 
-    this.cursors = this.cursors || {};
-    this.schema = this.schema || {};
+    this.schema = _lodash2.default.cloneDeep(this.schema || {});
 
     var tree = this.getTreeCursor(this.props);
 
@@ -123,6 +124,7 @@ var SchemaBranchMixin = {
     }
   },
 
+
   /**
    * Create state from tree and update current state with created state
    *
@@ -131,6 +133,7 @@ var SchemaBranchMixin = {
   updateStateFromTree: function updateStateFromTree(tree) {
     this.setState(this.createState(tree));
   },
+
 
   /**
    * Create state in tree corresponding to schema at first-level
