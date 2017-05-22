@@ -1,6 +1,6 @@
 {
   "name": "baobab-react-schemabranchmixin",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "SchemaBranchMixin for baobab-react. Mixin allows to define schema for branch component",
   "main": "./dist/index.js",
   "scripts": {
@@ -16,12 +16,12 @@
     "react",
     "baobab"
   ],
-  "author": "Bro agency",
+  "author": "beda.software",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Brogency/baobab-react-schemabranchmixin/issues"
+    "url": "https://github.com/beda-software/baobab-react-schemabranchmixin/issues"
   },
-  "homepage": "https://github.com/Brogency/baobab-react-schemabranchmixin#readme",
+  "homepage": "https://github.com/beda-software/baobab-react-schemabranchmixin#readme",
   "devDependencies": {
     "babel": "^6.3.26",
     "babel-cli": "^6.4.0",

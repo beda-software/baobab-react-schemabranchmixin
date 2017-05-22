@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin.svg)](https://travis-ci.org/Brogency/baobab-react-schemabranchmixin)
-[![Coverage Status](https://coveralls.io/repos/Brogency/baobab-react-schemabranchmixin/badge.svg?branch=master&service=github)](https://coveralls.io/github/Brogency/baobab-react-schemabranchmixin?branch=master)
+[![Build Status](https://travis-ci.org/beda-software/baobab-react-schemabranchmixin.svg)](https://travis-ci.org/beda-software/baobab-react-schemabranchmixin)
+[![Coverage Status](https://coveralls.io/repos/beda-software/baobab-react-schemabranchmixin/badge.svg?branch=master&service=github)](https://coveralls.io/github/beda-software/baobab-react-schemabranchmixin?branch=master)
 [![npm version](https://badge.fury.io/js/baobab-react-schemabranchmixin.svg)](https://badge.fury.io/js/baobab-react-schemabranchmixin)
 
 baobab-react-schemabranchmixin
@@ -75,6 +75,7 @@ const Page = React.createClass({
 
 ## Release History
 
+* 1.0.10 Fix #6
 * 1.0.9 Fixed problem with cursors definition as function
 * 1.0.8 Fixed problems with nested schema default values
 * 1.0.7 Fixed problems with monkey
