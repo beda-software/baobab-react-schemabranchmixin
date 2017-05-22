@@ -1,7 +1,24 @@
-import _ from 'lodash';
-import React from 'react';
-import { branch as BranchMixin } from 'baobab-react/mixins';
-import BaobabPropTypes from 'baobab-prop-types';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _mixins = require('baobab-react/mixins');
+
+var _baobabPropTypes = require('baobab-prop-types');
+
+var _baobabPropTypes2 = _interopRequireDefault(_baobabPropTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * SchemaCursorMixin is designed for use with baobab-react mixin `branch`.
@@ -54,62 +71,69 @@ import BaobabPropTypes from 'baobab-prop-types';
  * });
  */
 
-const SchemaBranchMixin = {
+var SchemaBranchMixin = {
   propTypes: {
-    tree: React.PropTypes.oneOfType([BaobabPropTypes.baobab, BaobabPropTypes.cursor]),
+    tree: _react2.default.PropTypes.oneOfType([_baobabPropTypes2.default.baobab, _baobabPropTypes2.default.cursor])
   },
 
   contextTypes: {
-    tree: BaobabPropTypes.baobab,
+    tree: _baobabPropTypes2.default.baobab
   },
 
-  getTreeCursor(props) {
+  getTreeCursor: function getTreeCursor(props) {
     return props.tree || this.context.tree.select();
   },
+  getInitialState: function getInitialState() {
+    var _this = this;
 
-  getInitialState() {
-    if (_.isFunction(this.cursors)) {
+    if (_lodash2.default.isFunction(this.cursors)) {
       this.cursors = this.cursors(this.props, this.context);
     } else {
-      this.cursors = _.cloneDeep(this.cursors) || {};
+      this.cursors = _lodash2.default.cloneDeep(this.cursors) || {};
     }
 
-    this.schema = _.cloneDeep(this.schema || {});
+    this.schema = _lodash2.default.cloneDeep(this.schema || {});
 
-    const tree = this.getTreeCursor(this.props);
+    var tree = this.getTreeCursor(this.props);
 
     // Add initial cursors to first-level schema
     // Baobab-react branch mixin will add watchers for this cursors
-    _.each(this.schema, (value, key) => this.cursors[key] = tree.select(key));
+    _lodash2.default.each(this.schema, function (value, key) {
+      return _this.cursors[key] = tree.select(key);
+    });
   },
-
-  componentWillMount() {
-    const tree = this.getTreeCursor(this.props);
+  componentWillMount: function componentWillMount() {
+    var tree = this.getTreeCursor(this.props);
 
     this.updateStateFromTree(tree);
   },
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    var _this2 = this;
 
-  componentWillReceiveProps(nextProps) {
-    const oldTree = this.getTreeCursor(this.props);
-    const newTree = this.getTreeCursor(nextProps);
+    var oldTree = this.getTreeCursor(this.props);
+    var newTree = this.getTreeCursor(nextProps);
 
     if (oldTree !== newTree) {
       // Change cursor mapping for new tree via accessing to private `__cursorsMapping`
       // Baobab-react branch mixin will refresh watcher in this step
-      _.each(this.schema, (value, key) => this.__cursorsMapping[key] = newTree.select(key));
+      _lodash2.default.each(this.schema, function (value, key) {
+        return _this2.__cursorsMapping[key] = newTree.select(key);
+      });
 
       this.updateStateFromTree(newTree);
     }
   },
+
 
   /**
    * Create state from tree and update current state with created state
    *
    * @param tree
    */
-  updateStateFromTree(tree) {
+  updateStateFromTree: function updateStateFromTree(tree) {
     this.setState(this.createState(tree));
   },
+
 
   /**
    * Create state in tree corresponding to schema at first-level
@@ -118,14 +142,14 @@ const SchemaBranchMixin = {
    * @param tree Baobab Tree
    * @returns {Object}
    */
-  createState(tree) {
+  createState: function createState(tree) {
     function iterate(curTree, curSchema) {
-      return _.mapValues(curSchema, (value, key) => {
-        const cursor = curTree.select(key);
+      return _lodash2.default.mapValues(curSchema, function (value, key) {
+        var cursor = curTree.select(key);
 
         if (!cursor.exists() || curSchema._override === true) {
           cursor.set(value);
-        } else if (_.isPlainObject(value) && _.isPlainObject(cursor.get())) {
+        } else if (_lodash2.default.isPlainObject(value) && _lodash2.default.isPlainObject(cursor.get())) {
           iterate(cursor, value);
         }
 
@@ -133,15 +157,15 @@ const SchemaBranchMixin = {
       });
     }
 
-    const state = iterate(tree, this.schema);
+    var state = iterate(tree, this.schema);
     this.context.tree.commit();
 
     return state;
-  },
+  }
 };
 
-export default {
+exports.default = {
   displayName: 'SchemaBranchMixin',
 
-  mixins: [SchemaBranchMixin, BranchMixin],
+  mixins: [SchemaBranchMixin, _mixins.branch]
 };
